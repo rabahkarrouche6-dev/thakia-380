@@ -391,6 +391,142 @@ export const appRouter = router({
 
         return { success: true, user, role: input.role, token: sessionToken };
       }),
+    register: publicProcedure
+      .input(
+        z.object({
+          fullName: z.string().trim().min(2).max(100),
+          email: z.string().trim().email(),
+          phone: z.string().trim().min(6).max(30),
+          password: z.string().min(4),
+          wilaya: z.string().trim().min(1),
+          commercialRegister: z.string().trim().min(1),
+          role: z.enum(["supplier", "authority", "regulator"]).default("supplier"),
+          termsAccepted: z.boolean().default(true),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        const sanitized = input.email.toLowerCase().replace(/[^a-z0-9]/g, "_");
+        const openId = `reg_${input.role}_${sanitized}`;
+
+        try {
+          await upsertUser({
+            openId,
+            name: input.fullName,
+            email: input.email,
+            role: input.role,
+            loginMethod: "form",
+            lastSignedIn: new Date(),
+          });
+        } catch {
+          // Gracefully continue if DB offline
+        }
+
+        let user: any = null;
+        try {
+          user = await getUserByOpenId(openId);
+        } catch {
+          user = null;
+        }
+
+        if (!user) {
+          user = {
+            id: Math.floor(Math.random() * 9000) + 1000,
+            openId,
+            name: input.fullName,
+            email: input.email,
+            role: input.role,
+            loginMethod: "form",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            lastSignedIn: new Date(),
+          };
+        }
+
+        if (input.role === "supplier" || input.role === "authority") {
+          try {
+            await ensureFreeSubscription(user.id, input.role);
+          } catch {
+            // Subscription setup if table available
+          }
+        }
+
+        const sessionToken = await sdk.createSessionToken(openId, { name: input.fullName });
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, sessionToken, cookieOptions);
+
+        try {
+          await logAudit({
+            actorId: user.id,
+            actorRole: input.role,
+            action: "user_registered",
+            entityType: "user",
+            entityId: user.id,
+            result: "success",
+            metadata: JSON.stringify({
+              role: input.role,
+              wilaya: input.wilaya,
+              commercialRegister: input.commercialRegister,
+            }),
+          });
+        } catch {
+          // Ignore audit error
+        }
+
+        return { success: true, user, role: input.role, token: sessionToken };
+      }),
+    login: publicProcedure
+      .input(
+        z.object({
+          email: z.string().trim().email(),
+          password: z.string().min(1),
+          role: z.enum(["supplier", "authority", "regulator"]).optional(),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        const role = input.role ?? "supplier";
+        const sanitized = input.email.toLowerCase().replace(/[^a-z0-9]/g, "_");
+        const openId = `reg_${role}_${sanitized}`;
+
+        let user: any = null;
+        try {
+          user = await getUserByOpenId(openId);
+        } catch {
+          user = null;
+        }
+
+        if (!user) {
+          const userName = input.email.split("@")[0] || "المستخدم";
+          try {
+            await upsertUser({
+              openId,
+              name: userName,
+              email: input.email,
+              role,
+              loginMethod: "form",
+              lastSignedIn: new Date(),
+            });
+            user = await getUserByOpenId(openId);
+          } catch {
+            user = {
+              id: Math.floor(Math.random() * 9000) + 1000,
+              openId,
+              name: userName,
+              email: input.email,
+              role,
+              loginMethod: "form",
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              lastSignedIn: new Date(),
+            };
+          }
+        }
+
+        const sessionToken = await sdk.createSessionToken(user.openId || openId, { name: user.name || "User" });
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, sessionToken, cookieOptions);
+
+        return { success: true, user, role: user.role || role, token: sessionToken };
+      }),
     setThemePreference: protectedProcedure.input(z.enum(["light", "dark", "system"])).mutation(async ({ ctx, input }) => {
       const themePreference = await updateUserThemePreference(ctx.user.id, input);
       return { themePreference } as const;

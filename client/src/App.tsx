@@ -9,8 +9,7 @@ import { LocaleProvider } from "./contexts/LocaleContext";
 import LanguageToggle from "./components/LanguageToggle";
 import LocaleTranslationBridge from "./components/LocaleTranslationBridge";
 import Home from "./pages/Home";
-import LoginRedirect from "./pages/LoginRedirect";
-import PortalRegistration from "./pages/PortalRegistration";
+import Register from "./pages/Register";
 import StatusPage from "@/pages/StatusPage";
 import PublicPortal from "@/pages/PublicPortal";
 import Pricing from "@/pages/Pricing";
@@ -18,7 +17,24 @@ import PreviewPortals from "@/pages/PreviewPortals";
 import Discover from "@/pages/Discover";
 
 function Router() {
-  return <Switch><Route path="/" component={Home} /><Route path="/status" component={StatusPage} /><Route path="/pricing" component={Pricing} /><Route path="/discover" component={Discover} /><Route path="/login" component={LoginRedirect} /><Route path="/login/:portal" component={LoginRedirect} /><Route path="/register/:portal" component={PortalRegistration} /><Route path="/portal/:portal" component={PublicPortal} /><Route path="/preview" component={PreviewPortals} /><Route path="/preview/:portal" component={PreviewPortals} /><Route path="/app" component={Portal} /><Route path="/404" component={NotFound} /><Route component={NotFound} /></Switch>;
+  return (
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/status" component={StatusPage} />
+      <Route path="/pricing" component={Pricing} />
+      <Route path="/discover" component={Discover} />
+      <Route path="/login" component={Register} />
+      <Route path="/login/:portal" component={Register} />
+      <Route path="/register" component={Register} />
+      <Route path="/register/:portal" component={Register} />
+      <Route path="/portal/:portal" component={PublicPortal} />
+      <Route path="/preview" component={PreviewPortals} />
+      <Route path="/preview/:portal" component={PreviewPortals} />
+      <Route path="/app" component={Portal} />
+      <Route path="/404" component={NotFound} />
+      <Route component={NotFound} />
+    </Switch>
+  );
 }
 
 function App() {

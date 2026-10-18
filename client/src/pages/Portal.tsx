@@ -14,7 +14,6 @@ import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { consumePortalSelection, storePortalSelection } from "../../../shared/login";
 import { resolvePortalForRole } from "../../../shared/portalRouting";
-import DirectPortalSelector from "@/components/DirectPortalSelector";
 
 const CentralAdminPortal = lazy(() => import("@/pages/CentralAdminPortal"));
 const AuthorityWorkspace = lazy(() => import("@/pages/AuthorityShell"));
@@ -93,13 +92,10 @@ export default function Portal() {
   }
 
   if (!user || user.role === "user") {
-    return (
-      <DashboardLayout title={isEnglish ? "Choose Portal" : "اختيار البوابة"}>
-        <div className="py-6">
-          <DirectPortalSelector />
-        </div>
-      </DashboardLayout>
-    );
+    if (typeof window !== "undefined") {
+      window.location.assign("/register");
+    }
+    return null;
   }
 
   const portal = resolvePortalForRole(user.role);

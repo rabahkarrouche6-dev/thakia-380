@@ -136,53 +136,44 @@ export default function SupplierJourneyScrollytelling() {
     <section
       ref={sectionRef}
       id="supplier-journey"
-      className="relative scroll-mt-8 overflow-hidden rounded-[2.25rem] border border-[var(--landing-navy)]/10 bg-[var(--landing-navy)] px-5 py-20 text-white shadow-[0_30px_80px_rgba(13,45,72,.16)] sm:px-10 lg:px-16"
+      className="landing-section my-8 relative scroll-mt-8 overflow-hidden rounded-3xl border border-[#135041] bg-[#0A2E24] p-6 sm:p-10 lg:p-14 text-white shadow-sm"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_12%_16%,rgba(45,210,153,.2),transparent_25%),radial-gradient(circle_at_90%_80%,rgba(52,142,190,.2),transparent_30%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-emerald-200/70 to-transparent"
-      />
-
       <div className="relative mx-auto max-w-3xl text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/20 bg-white/10 px-4 py-2 text-xs font-bold text-emerald-100">
-          <Sparkles className="h-4 w-4" /> رحلة المتعامل الاقتصادي
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#1C6B55] bg-[#135041] px-4 py-2 text-xs font-semibold text-[#D1F4E7] shadow-sm">
+          <Sparkles className="h-4 w-4 text-[#C79A3C]" /> رحلة المتعامل الاقتصادي
         </div>
-        <h2 className="landing-heading mt-5 text-3xl font-black leading-tight sm:text-5xl">
+        <h2 className="landing-heading mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
           من الاكتشاف إلى التتويج
         </h2>
-        <p className="mt-5 text-sm leading-8 text-slate-200 sm:text-base">
+        <p className="mt-3 text-base leading-relaxed text-[#D1F4E7]">
           مسار واضح يساعدك على الانتقال من ملف مؤسسي منظم إلى عرض متابع وموثق،
           مع بقاء القرار النهائي لدى الجهات المخولة.
         </p>
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-2 text-[11px] font-bold text-slate-300">
-          <span className="journey-status-pill"><span className="journey-status-dot" /> المسار موثق</span>
-          <span className="journey-status-pill"><Clock3 className="h-3.5 w-3.5 text-emerald-200" /> الأجل يحدده الخادم</span>
-          <span className="journey-status-pill"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-200" /> القرار بشري</span>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-[#D1F4E7]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#1C6B55] bg-[#135041] px-3.5 py-1.5"><span className="h-2 w-2 rounded-full bg-[#087F5B]" /> المسار موثق</span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#1C6B55] bg-[#135041] px-3.5 py-1.5"><Clock3 className="h-3.5 w-3.5 text-[#63B99C]" /> الأجل يحدده الخادم</span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#1C6B55] bg-[#135041] px-3.5 py-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-[#63B99C]" /> القرار بشري</span>
         </div>
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-5xl">
+      <div className="relative mx-auto mt-12 max-w-5xl">
         <div
           aria-hidden="true"
-          className="absolute bottom-8 start-[1.15rem] top-8 w-1 rounded-full bg-white/10 sm:start-1/2 sm:-translate-x-1/2"
+          className="absolute bottom-8 start-[1.15rem] top-8 w-1 rounded-full bg-[#135041] sm:start-1/2 sm:-translate-x-1/2"
         >
           <span
-            className="absolute inset-x-0 top-0 rounded-full bg-gradient-to-b from-emerald-200 via-emerald-400 to-cyan-300 transition-[height] duration-1000 ease-out motion-reduce:transition-none"
+            className="absolute inset-x-0 top-0 rounded-full bg-[#087F5B] transition-[height] duration-700 ease-out motion-reduce:transition-none"
             style={{ height: isVisible ? progress : "0%" }}
           />
           <span
-            className="absolute -right-1.5 top-0 h-4 w-4 rounded-full border-4 border-[var(--landing-navy)] bg-emerald-300 shadow-[0_0_22px_rgba(110,231,183,.8)] transition-[top] duration-1000 ease-out motion-reduce:transition-none"
+            className="absolute -right-1 top-0 h-3.5 w-3.5 rounded-full border-2 border-[#0A2E24] bg-[#63B99C] transition-[top] duration-700 ease-out motion-reduce:transition-none"
             style={{
-              top: isVisible ? `calc(${progress} - 0.4rem)` : "-0.4rem",
+              top: isVisible ? `calc(${progress} - 0.35rem)` : "-0.35rem",
             }}
           />
         </div>
 
-        <div className="journey-opposed-pairs space-y-10 sm:space-y-14" role="list">
+        <div className="journey-opposed-pairs space-y-8 sm:space-y-12" role="list">
           {milestonePairs.map((pair, pairIndex) => {
             const pairIsActive = pair.some(
               milestone => milestones.findIndex(item => item.id === milestone.id) === highlightedIndex
@@ -195,11 +186,11 @@ export default function SupplierJourneyScrollytelling() {
               className="relative grid grid-cols-1 items-stretch gap-5 pr-10 sm:grid-cols-[minmax(0,1fr)_5.5rem_minmax(0,1fr)] sm:gap-7 sm:pr-0"
             >
               <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 hidden w-[5.5rem] -translate-x-1/2 -translate-y-1/2 items-center sm:flex">
-                <span className={`h-px flex-1 origin-right bg-white/20 transition-[transform,background-color] duration-500 ${pairIsActive ? "scale-x-100 bg-emerald-200/80" : "scale-x-75"} motion-reduce:transition-none`} />
-                <span className={`relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border text-[10px] font-black tracking-[.1em] transition-[transform,background-color,border-color,box-shadow] duration-500 ${pairIsActive ? "scale-110 border-emerald-100 bg-emerald-200 text-[var(--landing-navy)] shadow-[0_0_24px_rgba(110,231,183,.55)]" : "border-white/20 bg-[var(--landing-navy)] text-emerald-100"} motion-reduce:transition-none`}>
+                <span className={`h-px flex-1 origin-right transition-colors duration-300 ${pairIsActive ? "bg-[#087F5B]" : "bg-[#1C6B55]"}`} />
+                <span className={`relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border font-mono text-[11px] font-bold tracking-wider transition-colors duration-300 ${pairIsActive ? "border-[#63B99C] bg-[#135041] text-white shadow-sm" : "border-[#1C6B55] bg-[#0A2E24] text-[#D1F4E7]"}`}>
                   {pair.map(item => item.number).join("·")}
                 </span>
-                <span className={`h-px flex-1 origin-left bg-white/20 transition-[transform,background-color] duration-500 ${pairIsActive ? "scale-x-100 bg-emerald-200/80" : "scale-x-75"} motion-reduce:transition-none`} />
+                <span className={`h-px flex-1 origin-left transition-colors duration-300 ${pairIsActive ? "bg-[#087F5B]" : "bg-[#1C6B55]"}`} />
               </div>
               {pair.map(
                 ({ id, number, eyebrow, title, description, icon: Icon, detail, handoff, cue }, cardIndex) => {
@@ -227,42 +218,40 @@ export default function SupplierJourneyScrollytelling() {
                             onBlur={() => setInteractionIndex(null)}
                             onMouseEnter={() => setInteractionIndex(index)}
                             onMouseLeave={() => setInteractionIndex(null)}
-                            className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[1.75rem] border p-6 text-start outline-none transition-[transform,box-shadow,border-color,background-color] duration-300 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:ring-4 focus-visible:ring-emerald-200/35 ${active ? "border-emerald-200/40 bg-white/12 shadow-[0_18px_48px_rgba(0,0,0,.18)]" : "border-white/10 bg-white/[.06]"} motion-reduce:transform-none motion-reduce:transition-none`}
+                            className={`group relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border p-6 text-start outline-none transition-all duration-200 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:ring-2 focus-visible:ring-[#087F5B] ${active ? "border-[#63B99C] bg-[#175C4B] shadow-md" : "border-[#1C6B55] bg-[#135041]"}`}
                           >
-                        <div
-                          aria-hidden="true"
-                          className="pointer-events-none absolute -inset-x-1/2 top-0 h-px bg-gradient-to-r from-transparent via-emerald-200 to-transparent opacity-70 transition-transform duration-700 group-hover:translate-x-full motion-reduce:transition-none"
-                        />
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="flex items-center gap-3">
-                            <span
-                              className={`rounded-2xl p-3 ${active ? "bg-emerald-200 text-[var(--landing-navy)]" : "bg-white/10 text-emerald-100"}`}
-                            >
-                              <Icon className="h-6 w-6" />
-                            </span>
-                            <span className="text-xs font-bold tracking-[.14em] text-emerald-200">
-                              {eyebrow}
+                        <div>
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="flex items-center gap-3">
+                              <span
+                                className={`rounded-xl p-2.5 transition-colors ${active ? "bg-[#087F5B] text-white" : "bg-[#1C6B55] text-[#63B99C]"}`}
+                              >
+                                <Icon className="h-5 w-5" />
+                              </span>
+                              <span className="text-xs font-semibold tracking-wider text-[#63B99C]">
+                                {eyebrow}
+                              </span>
+                            </div>
+                            <span className="rounded-full border border-[#1C6B55] bg-[#0A2E24] px-2.5 py-1 font-mono text-xs font-bold text-[#D1F4E7]">
+                              {number}
                             </span>
                           </div>
-                          <span className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[10px] font-black tracking-[.16em] text-emerald-100">
-                            {number}
-                          </span>
-                        </div>
-                        <h3 className="mt-5 text-2xl font-black text-white">{title}</h3>
-                        <p className="mt-3 text-sm leading-8 text-slate-200">{description}</p>
-                        <div className="mt-4 flex items-center gap-2 text-[11px] font-bold text-emerald-100/80">
-                          <span className="journey-step-line" />
-                          <span>{handoff}</span>
+                          <h3 className="mt-4 text-xl sm:text-2xl font-bold text-white">{title}</h3>
+                          <p className="mt-2 text-sm leading-relaxed text-[#D1F4E7]">{description}</p>
+                          <div className="mt-4 flex items-center gap-2 text-xs font-medium text-[#A7F3D0]">
+                            <span className="inline-block h-px w-5 bg-[#63B99C]" />
+                            <span>{handoff}</span>
+                          </div>
                         </div>
                         <div
-                          className={`mt-auto inline-flex w-fit items-center gap-2 rounded-full px-3 py-2 text-xs font-bold ${active ? "bg-emerald-200/15 text-emerald-100" : "bg-white/5 text-slate-300"}`}
+                          className={`mt-6 inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium ${active ? "border-[#63B99C]/50 bg-[#087F5B]/20 text-[#63B99C]" : "border-[#1C6B55] bg-[#0A2E24] text-[#D1F4E7]"}`}
                         >
-                          <CheckCircle2 className="h-4 w-4" />
+                          <CheckCircle2 className="h-3.5 w-3.5" />
                           {detail}
                         </div>
                           </a>
                         </TooltipTrigger>
-                        <TooltipContent side="top" sideOffset={10} className="bg-slate-950 text-white dark:bg-white dark:text-slate-950">
+                        <TooltipContent side="top" sideOffset={10} className="bg-[#041D17] text-white border border-[#135041]">
                           {cue} · اضغط للانتقال إلى التفاصيل
                         </TooltipContent>
                       </Tooltip>
@@ -272,8 +261,8 @@ export default function SupplierJourneyScrollytelling() {
               )}
             </div>
             {pairIndex < milestonePairs.length - 1 && (
-              <div className={`journey-handoff relative mx-auto flex w-fit items-center gap-3 rounded-full border px-4 py-2 text-[11px] font-bold transition-[border-color,background-color,color,box-shadow] duration-500 ${pairIsActive ? "border-emerald-200/40 bg-emerald-200/10 text-emerald-100 shadow-[0_0_22px_rgba(110,231,183,.12)]" : "border-white/10 bg-white/[.04] text-slate-400"}`} aria-label="انتقال إلى المرحلة التالية">
-                <ArrowDown className="h-4 w-4" aria-hidden="true" />
+              <div className="journey-handoff relative mx-auto flex w-fit items-center gap-2.5 rounded-full border border-[#1C6B55] bg-[#135041] px-4 py-2 text-xs font-medium text-[#D1F4E7] shadow-sm" aria-label="انتقال إلى المرحلة التالية">
+                <ArrowDown className="h-4 w-4 text-[#63B99C]" aria-hidden="true" />
                 <span>انتقال موثق إلى الخطوة التالية</span>
               </div>
             )}
@@ -283,13 +272,13 @@ export default function SupplierJourneyScrollytelling() {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-12 flex max-w-3xl flex-col items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/10 p-5 text-center sm:flex-row sm:text-right">
-        <p className="text-sm leading-7 text-slate-200">
+      <div className="relative mx-auto mt-12 flex max-w-3xl flex-col items-center justify-between gap-4 rounded-2xl border border-[#1C6B55] bg-[#135041] p-6 text-center sm:flex-row sm:text-right shadow-sm">
+        <p className="text-sm leading-relaxed text-[#D1F4E7]">
           ابدأ من المسار الفعلي، وراجع كل خطوة قبل اتخاذ القرار المناسب.
         </p>
         <a
           href="/login"
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-emerald-200 px-5 py-3 text-sm font-black text-[var(--landing-navy)] transition hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200/30 motion-reduce:transition-none"
+          className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-xl bg-[#087F5B] hover:bg-[#066A4C] px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#087F5B]/30"
         >
           الدخول إلى المنصة <ArrowLeft className="h-4 w-4" />
         </a>

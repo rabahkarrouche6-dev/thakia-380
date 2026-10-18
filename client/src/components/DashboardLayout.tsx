@@ -13,7 +13,6 @@ import { Link, useLocation, useSearch } from "wouter";
 import { AUTH_ROUTES } from "@shared/login";
 import { useLocale } from "@/contexts/LocaleContext";
 import LanguageToggle from "@/components/LanguageToggle";
-import DirectPortalSelector from "@/components/DirectPortalSelector";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import React, { useState } from "react";
@@ -77,13 +76,10 @@ export default function DashboardLayout({
   }
 
   if (!user) {
-    return (
-      <div className="min-h-screen grid place-items-center bg-[#f4f7fb] p-4 sm:p-8" dir={direction}>
-        <div className="max-w-5xl w-full bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-slate-200">
-          <DirectPortalSelector />
-        </div>
-      </div>
-    );
+    if (typeof window !== "undefined") {
+      setLocation("/register");
+    }
+    return null;
   }
 
   const displayItems = items.length
