@@ -1,0 +1,1 @@
+ALTER TABLE `authorityOperationalAlerts` MODIFY COLUMN `type` enum('authority_approved','tender_published','tender_closed','evaluation_started','contract_status') NOT NULL;

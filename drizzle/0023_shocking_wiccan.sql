@@ -1,0 +1,1 @@
+ALTER TABLE `supplierOperationalAlerts` MODIFY COLUMN `type` enum('contract_awarded','contract_status','tender_deadline','tender_match') NOT NULL;

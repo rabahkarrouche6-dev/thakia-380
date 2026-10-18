@@ -1,0 +1,1 @@
+ALTER TABLE `operatorProfiles` ADD `legalForm` varchar(80);

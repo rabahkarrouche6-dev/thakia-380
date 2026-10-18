@@ -1,0 +1,2 @@
+CREATE INDEX `bid_documents_bid_created_idx` ON `bidDocuments` (`bidId`,`createdAt`);--> statement-breakpoint
+CREATE INDEX `operator_documents_user_created_idx` ON `operatorDocuments` (`userId`,`createdAt`);

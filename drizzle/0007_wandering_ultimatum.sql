@@ -1,0 +1,1 @@
+ALTER TABLE `bids` ADD CONSTRAINT `bids_tender_supplier_unique` UNIQUE(`tenderId`,`supplierId`);

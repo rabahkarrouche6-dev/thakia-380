@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `themePreference` enum('light','dark','system') DEFAULT 'system' NOT NULL;
